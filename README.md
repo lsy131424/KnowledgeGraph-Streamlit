@@ -1,6 +1,8 @@
 # Knowledge Graph Generator
 
 基于大语言模型LLM 的知识图谱生成工具，支持从文本中自动提取实体关系并可视化展示。
+## demo
+试用网址：https://knowledgegraph-app.streamlit.app/
 
 ## 项目介绍
 

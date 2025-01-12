@@ -18,43 +18,6 @@ AZURE_CONFIGS = {
     "xxx"
 }
 
-def setup_sidebar():
-    """Setup sidebar for API key inputs"""
-    with st.sidebar:
-        st.header("API Configuration")
-        
-        # Add supplier selection dropdown
-        supplier = st.selectbox(
-            "Select LLM Provider",
-            options=["zhipu", "azure"],
-            index=0,  # Default to zhipu
-            key="supplier_select"
-        )
-        st.session_state.current_supplier = supplier
-        
-        # Add temperature slider
-        temperature = st.slider(
-            "Temperature",
-            min_value=0.0,
-            max_value=1.0,
-            value=st.session_state.temperature,
-            step=0.1,
-            help="Higher values make the output more random, lower values make it more focused and deterministic"
-        )
-        st.session_state.temperature = temperature
-        
-        st.markdown("---")  # Add a divider
-        
-        # Single API key input
-        api_key = st.text_input(
-            f"Enter {supplier.upper()} API Key",
-            type="password",
-            value=st.session_state.api_key,
-            key="api_key_input"
-        )
-        if api_key:
-            st.session_state.api_key = api_key
-
 def call_llm(system_msg, user_msg, supplier=st.session_state.current_supplier):
     st.info(system_msg, icon="🔥")
     st.info(user_msg, icon="🔥")

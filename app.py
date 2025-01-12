@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 from utils import generate_graph_data
-from llm_utils import setup_sidebar, call_llm
+from llm_utils import call_llm
 from streamlit_agraph import agraph, Node, Edge, Config
 
 st.set_page_config(page_title="Knowledge Graph Generator", layout="wide")
@@ -21,6 +21,14 @@ if 'agraph_config' not in st.session_state:
     st.session_state.agraph_config = None
 if 'graph_ready' not in st.session_state:
     st.session_state.graph_ready = False
+
+# Initialize session state for API key, supplier and temperature
+if 'api_key' not in st.session_state:
+    st.session_state.api_key = ''
+if 'current_supplier' not in st.session_state:
+    st.session_state.current_supplier = 'zhipu'  # Default to zhipu
+if 'temperature' not in st.session_state:
+    st.session_state.temperature = 0.1  # Default temperature
 
 def prepare_graph_visualization(nodes_data, edges_data):
     """Prepare graph visualization data and config"""
@@ -118,10 +126,45 @@ if st.button("Extract Knowledge"):
 if not st.session_state.graph_ready:
     st.warning("Please extract knowledge first.")
 
+def setup_sidebar():
+    """Setup sidebar for API key inputs"""
+    with st.sidebar:
+        st.header("API Configuration")
+        
+        # Add supplier selection dropdown
+        supplier = st.selectbox(
+            "Select LLM Provider",
+            options=["zhipu", "azure"],
+            index=0,  # Default to zhipu
+            key="supplier_select"
+        )
+        st.session_state.current_supplier = supplier
+        
+        # Add temperature slider
+        temperature = st.slider(
+            "Temperature",
+            min_value=0.0,
+            max_value=1.0,
+            value=st.session_state.temperature,
+            step=0.1,
+            help="Higher values make the output more random, lower values make it more focused and deterministic"
+        )
+        st.session_state.temperature = temperature
+        
+        st.markdown("---")  # Add a divider
+        
+        # Single API key input
+        api_key = st.text_input(
+            f"Enter {supplier.upper()} API Key",
+            type="password",
+            value=st.session_state.api_key,
+            key="api_key_input"
+        )
+        if api_key:
+            st.session_state.api_key = api_key
+
 def main():
-    # Setup sidebar with API key inputs
     setup_sidebar()
-    
     # Rest of your application code...
 
 if __name__ == "__main__":

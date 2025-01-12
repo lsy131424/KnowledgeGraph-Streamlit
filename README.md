@@ -41,8 +41,8 @@
 
 1. 克隆项目
 ```bash
-git clone https://github.com/yourusername/knowledge-graph-generator.git
-cd knowledge-graph-generator
+git clone https://github.com/yourusername/KnowledgeGraph-Streamlit.git
+cd KnowledgeGraph-Streamlit
 ```
 
 2. 安装依赖

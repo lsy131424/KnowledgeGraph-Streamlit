@@ -4,7 +4,7 @@ from utils import generate_graph_data
 from llm_utils import call_llm
 from streamlit_agraph import agraph, Node, Edge, Config
 
-st.set_page_config(page_title="Knowledge Graph Generator", layout="wide")
+st.set_page_config(page_title="基于AI的经济学知识图谱", layout="wide")
 # Set page title
 st.title("基于AI的经济学知识图谱")
 

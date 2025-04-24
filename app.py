@@ -4,9 +4,9 @@ from utils import generate_graph_data
 from llm_utils import call_llm
 from streamlit_agraph import agraph, Node, Edge, Config
 
-st.set_page_config(page_title="基于AI的经济学知识图谱", layout="wide")
+st.set_page_config(page_title="基于大模型的文学知识图谱可视化系统", layout="wide")
 # Set page title
-st.title("基于AI的经济学知识图谱")
+st.title("基于大模型的文学知识图谱可视化系统")
 
 # Add description
 st.write("Please enter the text below for knowledge graph extraction.")
